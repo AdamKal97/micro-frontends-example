@@ -1,5 +1,5 @@
 {
-  "name": "sample-app-1",
+  "name": "sample-app-3",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,11 +10,10 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "document-register-element": "^1.14.3",
     "vue": "^2.6.10",
-    "vue-custom-element": "^3.2.8",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "webpack": "^4.39.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",

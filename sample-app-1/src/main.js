@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vueCustomElement from 'vue-custom-element'
+import 'document-register-element/build/document-register-element'
 
 Vue.config.productionTip = false
 

@@ -5,33 +5,41 @@
     <title>Hello microfrontends</title>
 
     <script>
-      const modules = ['sample-app-1', 'sample-app-2']
-      window.addEventListener('popstate', (ev) => {
-        const moduleName = window.location.pathname.slice(1)
-        if (modules.includes(moduleName)) {
-          const script = document.createElement('script');
-          script.src = `${moduleName}/dist/js/app.js`;
-          document.head.appendChild(script)
 
-          const styles = document.createElement('link')
-          styles.href = `${moduleName}/dist/css/app.css`
-          styles.rel = "stylesheet"
-          document.head.appendChild(styles)
+      function loadScripts(moduleName) {
+        const script = document.createElement('script');
+        script.src = moduleName + '/dist/js/app.js'
+        document.head.appendChild(script)
 
-          document.getElementById('app').innerHTML = `<${moduleName}></${moduleName}>`
-        }
-      });
-
-      window.pushUrl = (href) => {
-        history.pushState({}, '', href);
-        window.dispatchEvent(new Event('popstate'));
+        const styles = document.createElement('link')
+        styles.href = moduleName + '/dist/css/app.css'
+        styles.rel = "stylesheet"
+        document.head.appendChild(styles)
       }
+
+      window.addEventListener('load', function() {
+        document.getElementById('btn-1').addEventListener('click', function () {
+          const moduleName = 'sample-app-1'
+          loadScripts(moduleName)
+          document.getElementById('app').innerHTML = '<' + moduleName + '></' + moduleName + '>'
+        })
+        document.getElementById('btn-2').addEventListener('click', function() {
+          const moduleName = 'sample-app-2'
+          loadScripts(moduleName)
+          document.getElementById('app').innerHTML = '<' + moduleName + '></' + moduleName + '>'
+        })
+
+        document.getElementById('btn-3').addEventListener('click', function () {
+          loadScripts('sample-app-3')
+        })
+      })
     </script>
 </head>
 <body>
     <nav>
-        <button onclick="pushUrl('/sample-app-1')">sample-app-1</button>
-        <button onclick="pushUrl('/sample-app-2')">Sample-app-2</button>
+        <button id="btn-1">sample-app-1</button>
+        <button id="btn-2">Sample-app-2</button>
+        <button id="btn-3">Sample-app-3 (no custom component)</button>
     </nav>
     <div id="app"></div>
 </body>
